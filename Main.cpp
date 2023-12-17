@@ -20,7 +20,7 @@ int main(int argc, char const *argv[])
 
             cout << "Wellcome to the marketplace \n";
             cout << "What are you gonna do? \n";
-            cout << "1 - REGISTER | 2- LOGIN \n" << "3 - BUY | 4 - SELL \n" << "5 - LOGOUT | 6 - EXIT \n" << "7 - dEbUg \n";
+            cout << "1 - REGISTER | 2- LOGIN \n" << "3 - BUY | 4 - SELL \n" << "5 - LOGOUT | 6 - EXIT \n";
             cin >> option;
             
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -29,7 +29,8 @@ int main(int argc, char const *argv[])
             {
             case 1:
                 if(market.isLogged){
-                    cout << "You are already logged in!";
+                    cout << "You are already logged in! \n";
+                    system("pause");
                 }
                 else{
                     market.registerUser();
@@ -38,10 +39,25 @@ int main(int argc, char const *argv[])
 
             case 2:
                 if(market.isLogged){
-                    cout << "You are already logged in!";
+                    cout << "You are already logged in! \n";
+                    system("pause");
                 }
                 else{
                     market.loginUser();
+                }
+                break;
+                
+            case 5:
+                if(!market.isLogged){
+                    cout << "You are not logged in! \n";
+                    system("pause");
+                }
+                else{
+                    market.isLogged = false;
+                    market.loggedLogin = "";
+                    market.loggedPassword = "";
+                    cout << "You have logged you";
+                    system("pause");
                 }
                 break;
 
@@ -49,7 +65,19 @@ int main(int argc, char const *argv[])
                 cout << "Quiting...";
                 exit(0);
                 break;
+
+            case 7:
+                //Debugging purposes
+                for(User& u : market.users){
+                    cout << u.getLogin() << " and " << u.getPassword() << "\n";
+                }
+                cout << "isLogged = " << market.isLogged << "\n";
+                system("pause");
+                break;
+
             default:
+                cout << "Choose a valid option! \n";
+                system("pause");
                 break;
             }
 

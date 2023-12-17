@@ -34,11 +34,10 @@ void Marketplace::registerUser(){
     bool validPassword = false;
     while(!validPassword){
         cin >> writtenPassword;
-        
 
         validPassword = verifyIfPasswordIsValid(writtenPassword);
-        if(validPassword){
-            cout << "Your password needs to have at least 4 digits and less than 12 digits";
+        if(!validPassword){
+            cout << "Your password needs to have at least 4 digits and less than 12 digits \n";
         }
     }
 
@@ -47,6 +46,7 @@ void Marketplace::registerUser(){
 
     loggedLogin = writtenLogin;
     loggedPassword = loggedPassword;
+    system("pause");
 }
 
 void Marketplace::loginUser(){
@@ -60,39 +60,50 @@ void Marketplace::loginUser(){
         cin >> writtenLogin;
 
         clearScreen();
-        if(verifyIfPasswordIsValid(writtenPassword)){
+
+        if(verifyIfLoginExists(writtenLogin)){
             do{
             cout << "Now write down your password \n";
             cin >> writtenPassword;
 
             logging = !verifyIfPasswordIsCorrect(writtenPassword);
+
             } while (logging);
         }
     }
+
+    loggedLogin = foundUser.getLogin();
+    loggedPassword = foundUser.getPassword();
+    isLogged = true;
+
+    cout << "You are now logged in \n";
+    system("pause");
 }
 
 bool Marketplace::verifyIfLoginExists(string login){
 
     for(User& u : users){
-        if(u.getLogin() == login)
-        foundUser = u;
-        return true;
+        if(u.getLogin() == login){
+            foundUser = u;
+            return true;
+        }
     }
 
+    foundUser = User("","");
     return false;
 }
 
 bool Marketplace::verifyIfPasswordIsValid(string password){
     
     if(password.length() < 4 || password.length() > 12){
-        return true;
+        return false;
     }
 
-    return false;
+    return true;
 }
 
 bool Marketplace::verifyIfPasswordIsCorrect(string password){
-    
+
     if(foundUser.getPassword() == password){
         return true;
     }
@@ -107,4 +118,3 @@ void Marketplace::clearScreen(){
         system("clear");
     #endif
 }
-
