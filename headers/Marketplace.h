@@ -28,6 +28,8 @@ public:
 
     void loginUser();
 
+    void logoutUser();
+
     bool verifyIfLoginExists(std::string login);
 
     bool verifyIfPasswordIsValid(std::string password);

@@ -14,6 +14,8 @@ void Marketplace::registerUser(){
 
     string writtenLogin;
     string writtenPassword;
+
+    clearScreen();
     cout << "For registering, write down your login \n";
 
     bool validLogin = false;
@@ -24,11 +26,13 @@ void Marketplace::registerUser(){
         
 
         if(!validLogin){
+            clearScreen();
             cout << "This login already exists \n";
             cout << "Write another login \n";
         }
     }
 
+    clearScreen();
     cout << "Now, write down you password \n";
 
     bool validPassword = false;
@@ -37,10 +41,13 @@ void Marketplace::registerUser(){
 
         validPassword = verifyIfPasswordIsValid(writtenPassword);
         if(!validPassword){
+            clearScreen();
             cout << "Your password needs to have at least 4 digits and less than 12 digits \n";
+            cout << "Write it again \n";
         }
     }
 
+    clearScreen();
     cout << "You are now registered \n"; 
     users.push_back(User(writtenLogin, writtenPassword));
 
@@ -50,19 +57,20 @@ void Marketplace::registerUser(){
 }
 
 void Marketplace::loginUser(){
+
     bool logging = true;
 
     while(logging){
         string writtenLogin;
         string writtenPassword;
         
+        clearScreen();
         cout << "Write down your login \n";
         cin >> writtenLogin;
 
-        clearScreen();
-
         if(verifyIfLoginExists(writtenLogin)){
             do{
+            clearScreen();
             cout << "Now write down your password \n";
             cin >> writtenPassword;
 
@@ -70,13 +78,27 @@ void Marketplace::loginUser(){
 
             } while (logging);
         }
+        else{
+            clearScreen();
+            cout << "This login does not exist!";
+            system("pause");
+        }
     }
 
     loggedLogin = foundUser.getLogin();
     loggedPassword = foundUser.getPassword();
     isLogged = true;
 
+    clearScreen();
     cout << "You are now logged in \n";
+    system("pause");
+}
+
+void Marketplace::logoutUser(){
+    isLogged = false;
+    loggedLogin = "";
+    loggedPassword = "";
+    cout << "You have logged in";
     system("pause");
 }
 

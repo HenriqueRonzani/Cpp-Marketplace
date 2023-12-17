@@ -18,7 +18,7 @@ int main(int argc, char const *argv[])
         while (loop){
             market.clearScreen();
 
-            cout << "Wellcome to the marketplace \n";
+            cout << "Welcome to the marketplace \n";
             cout << "What are you gonna do? \n";
             cout << "1 - REGISTER | 2- LOGIN \n" << "3 - BUY | 4 - SELL \n" << "5 - LOGOUT | 6 - EXIT \n";
             cin >> option;
@@ -53,11 +53,7 @@ int main(int argc, char const *argv[])
                     system("pause");
                 }
                 else{
-                    market.isLogged = false;
-                    market.loggedLogin = "";
-                    market.loggedPassword = "";
-                    cout << "You have logged you";
-                    system("pause");
+                    market.logoutUser();
                 }
                 break;
 
